@@ -2,16 +2,17 @@
 	"schemaVersion": 1,
 	"id": "ml",
 	"version": "${version}",
-	"name": "memory-leak",
-	"description": "This is an example description! Tell everyone what your mod is about!",
+	"name": "Memory Leak",
+	"description": "A server-side mod for intentionally causing controlled memory leaks. Perfect for stress testing servers and memory monitoring tools.",
 	"authors": [
-		"Me!"
+		"Hezaerd"
 	],
 	"contact": {
-		"homepage": "https://fabricmc.net/",
-		"sources": "https://github.com/FabricMC/fabric-example-mod"
+		"homepage": "https://modrinth.com/mod/memory-leak",
+        "sources": "https://github.com/Hezaerd/memory-leak",
+        "issues": "https://github.com/Hezaerd/memory-leak/issues"
 	},
-	"license": "CC0-1.0",
+	"license": "MIT",
 	"icon": "assets/ml/icon.png",
 	"environment": "*",
 	"entrypoints": {

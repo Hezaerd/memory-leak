@@ -1,6 +1,7 @@
 plugins {
 	id 'net.fabricmc.fabric-loom-remap' version "${loom_version}"
 	id 'maven-publish'
+	id 'com.modrinth.minotaur' version '2.+'
 }
 
 version = project.mod_version
@@ -59,20 +60,22 @@ jar {
 	}
 }
 
-// configure the maven publication
-publishing {
-	publications {
-		create("mavenJava", MavenPublication) {
-			artifactId = project.archives_base_name
-			from components.java
-		}
-	}
+modrinth {
+	token = System.getenv("MODRINTH_TOKEN")
+	projectId = "Aqk3l0pH"
+	versionNumber = project.mod_version
+	versionName = "Memory Leak ${project.mod_version}"
+	versionType = "release"
+	uploadFile = remapJar
+	gameVersions = ["1.21.11"]
+	loaders = ["fabric"]
+	changelog = file("CHANGELOG.md").exists() ? file("CHANGELOG.md").text : "No changelog provided."
 
-	// See https://docs.gradle.org/current/userguide/publishing_maven.html for information on how to set up publishing.
-	repositories {
-		// Add repositories to publish to here.
-		// Notice: This block does NOT have the same function as the block in the top level.
-		// The repositories here will be used for publishing your artifact, not for
-		// retrieving dependencies.
+	syncBodyFrom = rootProject.file("README.md").text
+
+	dependencies {
+		required.project "fabric-api" // Fabric API is required
 	}
 }
+
+tasks.modrinth.dependsOn(tasks.modrinthSyncBody)
