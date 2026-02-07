@@ -2,7 +2,11 @@ package com.hezaerd.utils;
 
 import com.hezaerd.ModLib;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.Identifier;
+//? if >=1.21.11 {
+/* import net.minecraft.resources.Identifier;
+ *///?} else {
+import net.minecraft.resources.ResourceLocation;
+//?}
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.bossevents.CustomBossEvent;
 import net.minecraft.server.bossevents.CustomBossEvents;
@@ -14,7 +18,11 @@ import java.util.List;
 public class Leak {
 
     private static final List<byte[]> LEAK_BUFFER = new ArrayList<>();
-    private static final Identifier BOSS_BAR_ID = ModLib.id("memory_leak");
+    //? if >=1.21.11 {
+    /*  private static final Identifier BOSS_BAR_ID = ModLib.id("memory_leak");
+     *///?} else {
+    private static final ResourceLocation BOSS_BAR_ID = ModLib.id("memory_leak");
+    //?}
 
     private static volatile boolean isLeaking = false;
     private static volatile int targetMegabytes = 0;

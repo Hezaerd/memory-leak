@@ -9,12 +9,19 @@ import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.permissions.Permissions;
+
+//? if >=1.21.11 {
+ /*import net.minecraft.server.permissions.Permissions;
+*///?}
 
 public final class LeakCommand {
     public static LiteralArgumentBuilder<CommandSourceStack> register() {
         return Commands.literal("leak")
-                .requires(source -> source.permissions().hasPermission(Permissions.COMMANDS_ADMIN))
+                //? if <1.21.11 {
+                .requires(source -> source.hasPermission(2))
+                //?} else {
+                /*.requires(source -> source.permissions().hasPermission(Permissions.COMMANDS_ADMIN))
+                 *///?}
                 .then(Commands.literal("start")
                         .then(Commands.argument("megabytes", IntegerArgumentType.integer(1, 10000))
                                 .then(Commands.argument("seconds", IntegerArgumentType.integer(1, 3600))
